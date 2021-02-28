@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./app.css";
+import { useEffect, useState } from "react";
+import { Map, GoogleApiWrapper } from "google-maps-react";
 
-function App() {
+function App(props) {
+  const [position, setposition] = useState({
+    lat: 0,
+    lng: 0,
+  });
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getPosition);
+    }
+    function getPosition(position) {
+      console.log(position.coords.latitude, position.coords.longitude);
+      setposition((_) => {
+        return {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+      });
+    }
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Map google={props.google} initialCenter={position} />
     </div>
   );
 }
 
-export default App;
+export default GoogleApiWrapper({
+  apiKey: "AIzaSyDKuWFzMBrW56RNuKx2LKSxRrmhozw-agY",
+})(App);
