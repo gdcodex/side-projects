@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import image from "./image.json";
 import "./pexels.css";
 var myHeaders = new Headers();
@@ -16,12 +16,20 @@ var requestOptions = {
   headers: myHeaders,
   redirect: "follow",
 };
+const width1 = [
+  [0, 5],
+  [5, 10],
+  [10, 15],
+];
+const width2 = [
+  [0, 7],
+  [7, 15],
+];
 function App3() {
   const [ImageBox, setImageBox] = useState(image.photos);
   const [InputText, setInputText] = useState("");
   const [loading, setloading] = useState(null);
   const [error, seterror] = useState("");
-
   const onChange = (e) => {
     const value = e.target.value;
     setInputText((p) => value);
@@ -62,32 +70,28 @@ function App3() {
           <input id="label" type="submit" value="Search" />
         </form>
       </header>
-      <section className="result-container">
-        {loading && <h3>loading.....</h3>}
-        {error && <h3>{error}</h3>}
-        {!loading && (
-          <>
-            <div className="result">
-              {ImageBox &&
-                ImageBox.slice(0, 5).map((e, i) => (
-                  <img className="pexels" src={e.src.large} alt="img" key={i} />
-                ))}
-            </div>
-            <div className="result">
-              {ImageBox &&
-                ImageBox.slice(5, 10).map((e, i) => (
-                  <img className="pexels" src={e.src.large} alt="img" key={i} />
-                ))}
-            </div>
-            <div className="result">
-              {ImageBox &&
-                ImageBox.slice(10, 15).map((e, i) => (
-                  <img className="pexels" src={e.src.large} alt="img" key={i} />
-                ))}
-            </div>
-          </>
-        )}
-      </section>
+      <>
+        {[width1, width2].map((exx, ixx) => (
+          <div className={`result-container box${ixx}`} key={ixx}>
+            {loading && <p>loading.....</p>}
+            {error && <h3>{error}</h3>}
+            {!loading &&
+              exx.map((ex, ix) => (
+                <div className="result" key={ix}>
+                  {ImageBox &&
+                    ImageBox.slice(ex[0], ex[1]).map((e, i) => (
+                      <img
+                        className="pexels"
+                        src={e.src.original}
+                        alt="img"
+                        key={i}
+                      />
+                    ))}
+                </div>
+              ))}
+          </div>
+        ))}
+      </>
     </main>
   );
 }
