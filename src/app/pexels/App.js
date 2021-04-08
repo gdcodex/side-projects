@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import image from "./image.json";
+import image from "../image.json";
 import "./pexels.css";
 var myHeaders = new Headers();
 myHeaders.append(
@@ -82,7 +82,7 @@ function App3() {
                     ImageBox.slice(ex[0], ex[1]).map((e, i) => (
                       <img
                         className="pexels"
-                        src={e.src.original}
+                        src={e.src.large}
                         alt="img"
                         key={i}
                       />
