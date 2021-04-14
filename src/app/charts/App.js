@@ -1,11 +1,13 @@
 import Highcharts from "highcharts";
+import highcharts3d from "highcharts/highcharts-3d";
 import { useEffect } from "react";
+highcharts3d(Highcharts);
 const config = {
   chart: {
     type: "pie",
     options3d: {
       enabled: true,
-      alpha: 45,
+      alpha: 20,
     },
     renderTo: "box",
   },
