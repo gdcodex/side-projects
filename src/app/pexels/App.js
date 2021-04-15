@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
-import image from "../image.json";
+import "antd/dist/antd.css";
+import { Layout, Input } from "antd";
+import { useState } from "react";
+import image from "./image.json";
 import "./pexels.css";
+const { Header, Content } = Layout;
+const { Search } = Input;
 var myHeaders = new Headers();
 myHeaders.append(
   "Authorization",
@@ -34,8 +38,7 @@ function App3() {
     const value = e.target.value;
     setInputText((p) => value);
   };
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = () => {
     seterror(false);
     setloading(true);
     fetch(`https://api.pexels.com/v1/search?query=${InputText}`, requestOptions)
@@ -52,25 +55,26 @@ function App3() {
       });
   };
   return (
-    <main className="pexel-container">
-      <header className="pexel-header">
+    <Layout className="pexel-container">
+      <Header className="pexel-header">
         <h3>
-          Nudes <img src="./sexy.png" id="icon" alt="icon" />
+          <span>
+          Nudes 
+          </span>
+          <img src="./sexy.png" id="icon" alt="icon" />
         </h3>
-        <form onSubmit={onSubmit}>
-          <input
-            type="text"
+        <form >
+          <Search
             placeholder="Search your fantasies"
-            name="query"
+            enterButton="Search"
+            size="middle"
             onChange={onChange}
-            value={InputText}
-            autoComplete="off"
-            id="input"
+            onSearch={onSubmit}
+            id="antinput"
           />
-          <input id="label" type="submit" value="Search" />
         </form>
-      </header>
-      <>
+      </Header>
+      <Content>
         {[width1, width2].map((exx, ixx) => (
           <div className={`result-container box${ixx}`} key={ixx}>
             {loading && <p>loading.....</p>}
@@ -91,8 +95,8 @@ function App3() {
               ))}
           </div>
         ))}
-      </>
-    </main>
+      </Content>
+    </Layout>
   );
 }
 

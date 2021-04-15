@@ -18,6 +18,7 @@ body {
   position: fixed;
   top: 0;
   width: 100vw;
+  padding-right: 145px;
 }
 
 #icon {
@@ -25,7 +26,7 @@ body {
   margin-left: 10px;
 }
 form {
-  width: 70%;
+  width: 50%;
   display: flex;
   align-items: center;
 }
@@ -56,6 +57,7 @@ form {
   padding-left: 18px;
   display: flex;
   align-items: center;
+  color: #fff
 }
 .pexel-container {
   width: 100vw;
@@ -95,9 +97,16 @@ form {
     margin-left: 0;
   }
 }
+@media only screen and (max-width: 1100px) {
+  .pexel-header {
+    padding-right: 68px;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .pexel-header {
     padding: 12px;
+    padding-right: 30px;
   }
   .result {
     width: 44%;
@@ -118,12 +127,26 @@ form {
     font-size: small;
   }
   .pexel-header h3 {
-    font-size: small;
+    font-size: 1.4em;
   }
 }
-@media only screen and (max-width: 415px) {
+@media only screen and (max-width: 425px) {
   #input {
     width: 67%;
     padding: 3px 8px;
   }
+  #icon {
+    width: 20px;
+  }
+}
+.ant-btn-primary{
+ background-color: #6e4867;
+ border-color: #6e4867;
+}
+.ant-btn-primary:hover{
+  background-color: #6e4867;
+  border-color: #6e4867;
+ }
+.ant-input{
+  color: #aa98a5;
 }
